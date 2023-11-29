@@ -1,0 +1,33 @@
+format_version: 10
+pipelines:
+  koi:
+    group: defaultGroup
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
+    materials:
+      gd:
+        git: https://github.com/new-org-who-dis/gd.git
+        shallow_clone: false
+        auto_update: false
+        branch: main
+    stages:
+    - build:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          koi:
+            timeout: 0
+            secure_variables:
+              a: AES:anLYlQ4sK0ailCNcJwY1yw==:KwsOoCWRbPrHo+K39NVJZQ==
+            tasks:
+            - exec:
+                arguments:
+                - -c
+                - ls -la
+                command: sh
+                run_if: passed
